@@ -16,15 +16,15 @@ class Balance
         'debit' => 3
     ];
 
-    static function getUserBalanceFromTransactions()
+    static function getUserBalanceFromTransactions(?int $userId = null)
     {
         global $USER;
 
-        if(!$USER->IsAuthorized()) {
+        if(!$USER->IsAuthorized() && !isset($userId)) {
             return null;
         }
 
-        $userId = $USER->GetId();
+        $userId = $userId ?: $USER->GetId();
         $balance = 0;
 
         $credits = self::getTransactions($userId, 'credit');
@@ -41,22 +41,27 @@ class Balance
         return $balance;
     }
 
-    static function getTransactions(int $userId, string $operationType): CIBlockResult|null
+    static function getTransactions(int $userId, ?string $operationType = null, array $params = []): CIBlockResult|null
     {
-        if (!$typeId = self::$operations[$operationType]) {
+        $typeId = self::$operations[$operationType];
+        if (isset($operationType) && !$typeId) {
             return null;
         }
 
+        $selectAs = $params["SELECT_AS"] ?: [];
+        $page = $params["PAGE"] ?: null;
+        $limit = $params["LIMIT"] ?: null;
+
         return CIBlockElement::GetList(
-            array(),
+            array("DATE_CREATE" => "DESC"),
             array(
                 "IBLOCK_ID" => TRANSACTIONS_IBLOCK_ID,
                 "PROPERTY_USER_ID" => $userId,
                 "PROPERTY_TYPE" => $typeId,
             ),
             false,
-            false,
-            array("PROPERTY_AMOUNT")
+            ['nPageSize' => $limit, 'iNumPage' => $page],
+            array("PROPERTY_AMOUNT", ...$selectAs)
         );
     }
 
