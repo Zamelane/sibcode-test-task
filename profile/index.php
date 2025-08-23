@@ -59,6 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <section>
             <h2>История операций</h2>
             <?php
+            $arrFilter = array(
+                "PROPERTY_USER" => $USER->GetID()
+            );
             $APPLICATION->IncludeComponent(
                 "bitrix:news.list",
                 "custom",
@@ -74,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     "DISPLAY_NAME" => "Y",
                     "DISPLAY_PREVIEW_TEXT" => "Y",
                     "PROPERTY_CODE" => array("AMOUNT", "TYPE", "DATE"),
+                    "FILTER_NAME" => "arrFilter",
                 )
             );
             ?>

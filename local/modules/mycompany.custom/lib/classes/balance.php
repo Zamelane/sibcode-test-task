@@ -66,7 +66,7 @@ class Balance
             array("DATE_CREATE" => "DESC"),
             array(
                 "IBLOCK_ID" => TRANSACTIONS_IBLOCK_ID,
-                "PROPERTY_USER_ID" => $userId,
+                "PROPERTY_USER" => $userId,
                 "PROPERTY_TYPE" => $typeId,
             ),
             false,
@@ -107,7 +107,7 @@ class Balance
             "IBLOCK_ID" => TRANSACTIONS_IBLOCK_ID,
             "NAME" => $name,
             "PROPERTY_VALUES" => array(
-                "USER_ID" => $userId,
+                "USER" => $userId,
                 "TYPE" => $typeId,
                 "AMOUNT" => $amount,
             ),
