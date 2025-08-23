@@ -1,0 +1,24 @@
+.transactions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.transaction {
+    display: inline-flex;
+    gap: 5px;
+
+    border: 2px solid #eff0f1;
+    border-radius: 16px;
+    color: #444;
+    vertical-align: middle;
+    padding: 0 10px;
+}
+.transaction > p {
+    max-height: min-content;
+}
+
+.transaction-type {
+    min-width: 80px;
+    text-align: center;
+}

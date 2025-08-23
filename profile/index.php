@@ -49,15 +49,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php
     $APPLICATION->IncludeComponent(
         "bitrix:news.list",
-        "",
+        "transactions",
         array(
             "IBLOCK_TYPE" => "transactions",
             "IBLOCK_ID" => $IBLOCK_ID,
             "NEWS_COUNT" => "10",
-            "SORT_BY1" => "DATE",
+            "SORT_BY1" => "DATE_CREATE",
             "SORT_ORDER1" => "DESC",
             "PAGER_TEMPLATE" => "round",
             "SET_TITLE" => "N",
+            "DISPLAY_DATE" => "Y",
+            "DISPLAY_NAME" => "Y",
+            "DISPLAY_PREVIEW_TEXT" => "Y",
+            "PROPERTY_CODE" => array("AMOUNT", "TYPE", "DATE"),
         )
     );
     ?>
