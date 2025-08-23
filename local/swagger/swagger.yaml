@@ -1,0 +1,75 @@
+openapi: 3.0.0
+info:
+  title: User Balance API
+  description: API для получения баланса пользователя и истории операций
+  version: 1.0.0
+paths:
+  /local/api/balance:
+    get:
+      summary: Получение баланса пользователя
+      parameters:
+        - in: query
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: ID пользователя
+      responses:
+        '200':
+          description: Баланс пользователя
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: integer
+                    example: 1
+                  balance:
+                    type: integer
+                    example: 500
+        '400':
+          description: Некорректный ID пользователя
+  /local/api/history:
+    get:
+      summary: Получение истории операций пользователя
+      parameters:
+        - in: query
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: ID пользователя
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: История операций пользователя
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    amount:
+                      type: integer
+                      example: 100
+                    type:
+                      type: string
+                      example: 'debit'
+                    date:
+                      type: string
+                      format: date-time
+                      example: '2023-01-01T12:00:00Z'

@@ -12,7 +12,7 @@ $APPLICATION->SetAdditionalCSS("/local/templates/.default/components/bitrix/news
             <div class="transaction">
                 <p><?= FormatDate("d.m.Y H:i", MakeTimeStamp($arItem["ACTIVE_FROM"])); ?></p>
                 <p>|</p>
-                <p class="transaction-type"><?= $arItem['PROPERTIES']['TYPE']['VALUE'] === 'debit' ? 'Зачисление' : 'Списание' ?></p>
+                <p class="transaction-type"><?= $arItem['PROPERTIES']['TYPE']['VALUE'] === 'debit' ? 'Списание' : 'Зачисление' ?></p>
                 <p>|</p>
                 <p><?= $arItem['PROPERTIES']['AMOUNT']['VALUE']; ?> баллов</p>
             </div>

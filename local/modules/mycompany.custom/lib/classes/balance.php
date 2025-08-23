@@ -52,6 +52,16 @@ class Balance
         $page = $params["PAGE"] ?: null;
         $limit = $params["LIMIT"] ?: null;
 
+        $arNavStartParams = [];
+
+        if (isset($limit)) {
+            $arNavStartParams['nPageSize'] = $limit;
+        }
+
+        if (isset($page)) {
+            $arNavStartParams['nPage'] = $page;
+        }
+
         return CIBlockElement::GetList(
             array("DATE_CREATE" => "DESC"),
             array(
@@ -60,7 +70,7 @@ class Balance
                 "PROPERTY_TYPE" => $typeId,
             ),
             false,
-            ['nPageSize' => $limit, 'iNumPage' => $page],
+            $arNavStartParams,
             array("PROPERTY_AMOUNT", ...$selectAs)
         );
     }
