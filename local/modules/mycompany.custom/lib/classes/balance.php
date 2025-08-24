@@ -59,7 +59,7 @@ class Balance
         }
 
         if (isset($page)) {
-            $arNavStartParams['nPage'] = $page;
+            $arNavStartParams['iNumPage'] = $page;
         }
 
         return CIBlockElement::GetList(
